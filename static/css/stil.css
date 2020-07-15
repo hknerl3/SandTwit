@@ -1,0 +1,17 @@
+body {
+    padding-top: 5rem;
+  }
+
+.container{
+    padding-top: 50px;
+}
+
+.post{
+    background-color: rgb(199, 194, 194);
+    padding: 20px;
+    margin: 10px;
+}
+
+ul a {
+    text-transform: capitalize;
+  }
