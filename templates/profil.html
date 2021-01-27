@@ -1,0 +1,67 @@
+{% extends "tema.html" %}
+
+{% block icerik %}
+<div class="container">
+    <div class="row mt-3">
+        <div class="card card-body bg-light span6 mt-5">
+            <div class="col-md-2">
+                <img src="https://secure.gravatar.com/avatar/de9b11d0f9c0569ba917393ed5e5b3ab?s=140&r=g&d=mm"
+                    class="img-circle">
+            </div>
+
+            <div class="col-md-8">
+                <h3>{{kisiBilgi.ad}} {{kisiBilgi.soyad}}</h3>
+                <h6>Email: {{kisiBilgi.eposta}}</h6>
+            </div>
+            {% if session['id']== kisiBilgi.id  %}
+            <div class="col-md-2">
+                <div class="btn-group" role="group">
+                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        İşlemler
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <a class="dropdown-item" href="#">Düzenle</a>
+                    </div>
+                </div>
+            </div>
+            {% elif session["id"] and session['id']!= kisiBilgi.id   %}
+                <form action="/takipDurumlari" method="POST" >
+                    <input name="hidden_takipEdilecek" type="hidden" value="{{kisiBilgi.id}}" />
+                    {% if arkadasDurum>0 %}
+                        <input type="submit"  value="Takip ediliyor" class="btn btn-info" />
+                    {% else %}
+                        <input type="submit" value="takip et" />
+                    {% endif %}
+                </form>
+            {% endif %}
+
+        </div>
+    </div>
+
+    {% if iletiler %}
+    {% for ileti in iletiler %}
+        <div class="card bg-light mt-2">
+            <div class="card-header bg-light">
+                <div class="media">
+                    <img class="img-fluid img-thumbnail align-self-center mr-3"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/48px-User_icon_2.svg.png"
+                        alt="Cinque Terre">
+                    <div class="media-body">
+                        <h5 class="mt-3"><a href="#">{{kisiBilgi.ad}} {{kisiBilgi.soyad}}</a></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body ">
+                <p class="card-text">{{ ileti.iletiicerik }}</p>
+            </div>
+        </div>
+    {% endfor %}
+    {% else %}
+        <div class="alert alert-info" >
+            Kullanıcının hiçbir iletisi bulunmuyor !
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}

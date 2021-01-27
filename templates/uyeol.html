@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static',filename='css/signin.css') }}" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SandTwit - Üye Ol</title>
+</head>
+<body>
+    <form action="/uyeol" method="POST" class="form-signin">
+        <h1 class="h3 mb-3 font-weight-normal">Üye Ol</h1>
+        <label for="inputad" class="sr-only">Ad</label>
+        <input type="text" id="inputad" name="inputad" class="form-control" placeholder="Ad giriniz" required autofocus>
+
+        <label for="inputsoyad" class="sr-only">Soyad</label>
+        <input type="text" id="inputsoyad" name="inputsoyad" class="form-control" placeholder="Soyadı giriniz" required >
+
+        <label for="inputemail" class="sr-only">Email</label>
+        <input type="email" id="inputemail" name="inputemail" class="form-control" placeholder="Email" required >
+
+        <label for="inputsifre" class="sr-only">Şifre</label>
+        <input type="password" id="inputsifre" name="inputsifre" class="form-control" placeholder="Şifre Giriniz" required >
+        
+        <label for="inputsifretekrar" class="sr-only">Şifre tekrar</label>
+        <input type="password" id="inputsifretekrar" name="inputsifretekrar" class="form-control" placeholder="Tekrar Şifre Giriniz" required>
+
+        <input  class="btn btn-lg btn-primary btn-block" type="submit" value="Üye Ol">
+
+        <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
+
+        {% if sayfaMesaj %}
+            {% if sayfaMesaj.status == 1 %}
+                <div class="alert alert-success" >
+                    {{sayfaMesaj.mesaj}}
+                </div>
+            {% elif sayfaMesaj.status == 2 %}
+                <div class="alert alert-danger" >
+                    {{sayfaMesaj.mesaj}}
+                </div>
+            {% else %}
+                <div class="alert alert-info" >
+                    {{sayfaMesaj.mesaj}}
+                </div>
+            {% endif %}
+        {%endif%}
+      </form>
+</body>
+</html>
